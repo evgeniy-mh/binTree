@@ -6,46 +6,24 @@
 
 package bintree;
 
-class Node<T> implements Comparable<T>{
-    T n;
-    Node left,right;
-    
-    public Node(){n=null;}
-    public Node(T n){
-        this.n=n;
-    }
-    public Node(T n,Node left,Node right){
-        this.n=n;
-        this.left=left;
-        this.right=right;
-    }
+public class BinTree {
 
-    @Override
-    public int compareTo(T o) {
-        ///////////////////////////////////
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
-
-public class BinTree<T> {
-
-    Node beg;
+    private Node beg;
     
     public BinTree(){ 
-        beg=new Node<>();
+        beg=new Node(0);
     }    
-    public BinTree(T n){ 
-        beg=new Node<>(n);
+    public BinTree(int n){ 
+        beg=new Node(n);
     }
     
-    public Node insert(T n){
-        Node pv=beg,prev;
-        boolean found;
-        while(pv!=null){
+    public Node insert(int n){
+        Node pv=beg,prev=null;
+        boolean found=false;
+        while(pv!=null && !found){
             prev=pv;
             if(n==pv.n) found=true;
-            //else if(n <pv.n) pv=pv.left;
+            else if(n <pv.n) pv=pv.left;
             else pv=pv.right;            
         }
         
@@ -55,12 +33,24 @@ public class BinTree<T> {
         }
         
         Node newNode=new Node(n);
-        //if(n<prev.n) prev.left=newNode;
+        if(n<prev.n) prev.left=newNode;
         else prev.right=newNode;
+        
+        return newNode;
     }
     
-    public static void main(String[] args) {
-        // TODO code application logic here
+    private void printTree(Node n, int level){
+        if(n!=null){
+             printTree(n.right, level+1);
+            for(int i=0;i<level;i++) System.out.print("   ");
+            System.out.println(n.n);
+            printTree(n.left,level+1); 
+        }
     }
     
+    public void printTree(){
+        Node pv=beg;
+        printTree(pv, 0);
+        System.out.println();
+    }    
 }
