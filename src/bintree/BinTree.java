@@ -17,8 +17,8 @@ public class BinTree {
         beg=new Node(n);
     }
     
-    public Node insert(int n){
-        Node pv=beg,prev=null;
+    private boolean find(int n, Node prev){ //запишет в prev родительэлемента
+        Node pv=beg;
         boolean found=false;
         while(pv!=null && !found){
             prev=pv;
@@ -26,10 +26,16 @@ public class BinTree {
             else if(n <pv.n) pv=pv.left;
             else pv=pv.right;            
         }
+        return found;
+    }
+    
+    public Node insert(int n){
+        Node prev = null;
+        boolean found=find(n,prev);
+       
         
         if(found){
-            //сделай  кастомное исключение
-            return pv;
+            //сделай  кастомное исключениe
         }
         
         Node newNode=new Node(n);
