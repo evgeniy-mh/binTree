@@ -16,13 +16,15 @@ public class BinTree {
     public BinTree(int n) {
         beg = new Node(n);
     }
-
-    private boolean find(int n, Node prev) { //запишет в prev родитель элемента
+    
+    public Node getRootNode() {
+        return beg;
+    }
+    
+    public boolean find(int n){
         Node pv = beg;
-        prev = beg;
         boolean found = false;
         while (pv != null && !found) {
-            prev = pv;
             if (n == pv.n) {
                 found = true;
             } else if (n < pv.n) {
@@ -31,10 +33,19 @@ public class BinTree {
                 pv = pv.right;
             }
         }
-
         return found;
     }
-
+    
+    public Node minimum(Node n){
+        if(n.left==null) return n;
+        else return minimum(n.left);
+    }
+    
+    public Node maximum(Node n){
+        if(n.right==null) return n;
+        else return maximum(n.right);
+    }
+    
     public Node insert(int n) throws AddElementException {
         Node pv = beg, prev = null;
         boolean found = false;
@@ -80,4 +91,6 @@ public class BinTree {
         printTree(pv, 0);
         System.out.println();
     }
+
+    
 }
