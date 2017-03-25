@@ -21,7 +21,7 @@ public class BinTree {
         return beg;
     }
     
-    public boolean find(int n){
+    public Node find(int n){
         Node pv = beg;
         boolean found = false;
         while (pv != null && !found) {
@@ -33,8 +33,10 @@ public class BinTree {
                 pv = pv.right;
             }
         }
-        return found;
+        if(!found) return null;
+        return pv;
     }
+    
     
     public Node minimum(Node n){
         if(n.left==null) return n;
@@ -73,6 +75,29 @@ public class BinTree {
         }
         return newNode;
 
+    }
+    
+    private Node delete(Node root, int k){
+        
+        if(root==null) return root;
+        
+        if(k<root.n){
+            root.left=delete(root.left,k);
+        }else if(k>root.n){
+            root.right=delete(root.right,k);
+        }else if(root.right!=null && root.left!=null){
+            root.n=minimum(root.right).n;
+            root.right=delete(root.right,root.n);
+        }else if(root.left!=null){
+            root=root.left;
+        } else {
+            root=root.right;
+        }
+        return root;
+    }
+    
+    public void delete(int n){
+        delete(beg,n);
     }
 
     private void printTree(Node n, int level) {
