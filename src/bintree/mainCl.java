@@ -12,6 +12,7 @@ package bintree;
 public class mainCl {
     public static void main(String[] args) {
         BinTree bt=new BinTree();
+        try{
         bt.insert(5);
         bt.insert(7);
         bt.insert(4);
@@ -19,6 +20,10 @@ public class mainCl {
         bt.insert(2);
         bt.insert(-5);
         bt.insert(-4);
+        }
+        catch(AddElementException ex){
+            System.out.println(ex);
+        }
         bt.printTree();
         
         
