@@ -38,5 +38,12 @@ public class mainCl {
         System.out.println("----------------------");
         bt.printTree();
         
+        System.out.println("inorder:");
+        bt.inorderPrint(bt.getRootNode()); System.out.println();
+        System.out.println("preorder:");
+        bt.preorderPrint(bt.getRootNode()); System.out.println();
+        System.out.println("postorder:");
+        bt.postorderPrint(bt.getRootNode());
+        
     }
 }
